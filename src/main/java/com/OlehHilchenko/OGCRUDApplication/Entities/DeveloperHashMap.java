@@ -4,5 +4,5 @@ import java.util.HashMap;
 
 public class DeveloperHashMap {
 
-    public HashMap<Long, Developer> developerHashMap = new HashMap<>();
+    public HashMap<Long, Developer> value = new HashMap<>();
 }

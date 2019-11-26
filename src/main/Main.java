@@ -1,10 +1,9 @@
 package main;
 
 
+import main.java.com.OlehHilchenko.OGCRUDApplication.DeveloperRepository.Write;
 import main.java.com.OlehHilchenko.OGCRUDApplication.Entities.*;
 
-import java.io.*;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 
@@ -44,13 +43,20 @@ public class Main implements AccountStatus {
         skil.add("sociable");
         AccountStatus stat = new AccountStat();
         ((AccountStat) stat).accountStatus = ACTIVE;
-        Developer og = new Developer(111, "Oleg", "Gil", skil, ACTIVE);
-        devHashMap.developerHashMap.put((long) 111, og);
+        Developer og = new Developer(111, "Oleg", "Gil", skil, BANNED);
+        LinkedHashSet<String> secSkil = new LinkedHashSet<>(skil);
+        secSkil.add("bro");
+        Developer pg = new Developer(22234, "Petro", "Gol", secSkil, ACTIVE);
+        devHashMap.value.put((long) 111, og);
+        devHashMap.value.put((long) 22234, pg);
         //developerSet.developers.add(og);
         //System.out.println(developerSet.developers.size());
         //System.out.println(developerSet.developers.toString());
+        System.out.println(devHashMap.value.size());
+        System.out.println(devHashMap.value.get((long)111).accountStat);
+        System.out.println(devHashMap.value.get((long)111).toString());
 
-        System.out.println(devHashMap.developerHashMap.get((long)111).accountStat);
-        System.out.println(devHashMap.developerHashMap.get((long)111).toString());
+        Write write = new Write();
+        write.write(devHashMap.value);
     }
 }
