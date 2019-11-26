@@ -38,15 +38,19 @@ public class Main implements AccountStatus {
      }
 */
         DeveloperSet developerSet = new DeveloperSet();
+        DeveloperHashMap devHashMap = new DeveloperHashMap();
         LinkedHashSet<String> skil = new LinkedHashSet<>();
         skil.add("mandatory");
         skil.add("sociable");
         AccountStatus stat = new AccountStat();
         ((AccountStat) stat).accountStatus = ACTIVE;
         Developer og = new Developer(111, "Oleg", "Gil", skil, ACTIVE);
-                developerSet.developers.add(og);
-        System.out.println(developerSet.developers.size());
-        System.out.println(developerSet.developers.toString());
+        devHashMap.developerHashMap.put((long) 111, og);
+        //developerSet.developers.add(og);
+        //System.out.println(developerSet.developers.size());
+        //System.out.println(developerSet.developers.toString());
 
+        System.out.println(devHashMap.developerHashMap.get((long)111).accountStat);
+        System.out.println(devHashMap.developerHashMap.get((long)111).toString());
     }
 }
