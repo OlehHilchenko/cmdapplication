@@ -1,12 +1,12 @@
 package main.java.com.OlehHilchenko.OGCRUDApplication.Entities;
 
-public class AccountStat implements AccountStatus {
+public class AccountStatusC implements AccountStatus {
 
    public String accountStatus;
 
    @Override
    public String toString() {
-      return "AccountStat{" +
+      return "AccountStatusC{" +
               "accountStatus='" + accountStatus + '\'' +
               '}';
    }

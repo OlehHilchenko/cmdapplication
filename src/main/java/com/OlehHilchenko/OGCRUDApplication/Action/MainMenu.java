@@ -1,4 +1,4 @@
-package main;
+package main.java.com.OlehHilchenko.OGCRUDApplication.Action;
 
 public interface MainMenu {
 

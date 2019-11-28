@@ -1,10 +1,11 @@
 package main;
 
 
-import main.java.com.OlehHilchenko.OGCRUDApplication.DeveloperRepository.Write;
+import main.java.com.OlehHilchenko.OGCRUDApplication.Action.*;
+import main.java.com.OlehHilchenko.OGCRUDApplication.DeveloperRepository.Read;
 import main.java.com.OlehHilchenko.OGCRUDApplication.Entities.*;
 
-import java.util.LinkedHashSet;
+import java.util.Random;
 
 
 public class Main implements AccountStatus {
@@ -36,13 +37,16 @@ public class Main implements AccountStatus {
          e.printStackTrace();
      }
 */
+        DevelopersHashMap devHashMap = new DevelopersHashMap();
+
+        // Test Entities classes....
+        /*
         DeveloperSet developerSet = new DeveloperSet();
-        DeveloperHashMap devHashMap = new DeveloperHashMap();
         LinkedHashSet<String> skil = new LinkedHashSet<>();
         skil.add("mandatory");
         skil.add("sociable");
-        AccountStatus stat = new AccountStat();
-        ((AccountStat) stat).accountStatus = ACTIVE;
+        AccountStatus stat = new AccountStatusC();
+        ((AccountStatusC) stat).accountStatus = ACTIVE;
         Developer og = new Developer(111, "Oleg", "Gil", skil, BANNED);
         LinkedHashSet<String> secSkil = new LinkedHashSet<>(skil);
         secSkil.add("bro");
@@ -53,10 +57,26 @@ public class Main implements AccountStatus {
         //System.out.println(developerSet.developers.size());
         //System.out.println(developerSet.developers.toString());
         System.out.println(devHashMap.value.size());
-        System.out.println(devHashMap.value.get((long)111).accountStat);
+        System.out.println(devHashMap.value.get((long)111).accountStatusC);
         System.out.println(devHashMap.value.get((long)111).toString());
 
+
+        //Test Write class
         Write write = new Write();
-        write.write(devHashMap.value);
+        write.write(devHashMap.value);    */
+
+        //Test Read class...
+        Read raed = new Read();
+        devHashMap.value = raed.parse();
+        /*
+        System.out.println(devHashMap.value.size());
+        for (Long l : devHashMap.value.keySet())
+            System.out.println(devHashMap.value.get(l).toString());
+            */
+        ViewAll viewAll = new ViewAll();
+        viewAll.viewAll(devHashMap.value);
+        //Test RandomID class...
+        RandomID randomID = new RandomID();
+        System.out.println(randomID.randomID(devHashMap.value));
     }
 }
