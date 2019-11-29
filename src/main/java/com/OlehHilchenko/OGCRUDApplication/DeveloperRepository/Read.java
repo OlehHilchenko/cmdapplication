@@ -89,6 +89,9 @@ public class Read implements DataWarehousePath {
                 }
             }
             skills.add(temp);
+            skills.remove("");
+            //System.out.println("+++");
+            //System.out.println(skills);
             developersFromFiles.get(tempId).skillSet.skills = skills;
         }
 

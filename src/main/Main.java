@@ -2,7 +2,7 @@ package main;
 
 
 import main.java.com.OlehHilchenko.OGCRUDApplication.Action.*;
-import main.java.com.OlehHilchenko.OGCRUDApplication.DeveloperRepository.Read;
+import main.java.com.OlehHilchenko.OGCRUDApplication.DeveloperRepository.*;
 import main.java.com.OlehHilchenko.OGCRUDApplication.Entities.*;
 
 import java.util.Random;
@@ -77,6 +77,22 @@ public class Main implements AccountStatus {
         viewAll.viewAll(devHashMap.value);
         //Test RandomID class...
         RandomID randomID = new RandomID();
-        System.out.println(randomID.randomID(devHashMap.value));
+        //System.out.println(randomID.randomID(devHashMap.value));
+
+        ViewByID viewByID = new ViewByID();
+        viewByID.viewByID(devHashMap.value.get((long) 22234));
+
+        //Create create = new Create();
+        //Long l = randomID.randomID(devHashMap.value);
+        //devHashMap.value.put(l, create.createNewDev(l));
+
+        Write write = new Write();
+        //write.write(devHashMap.value);
+
+        Update update = new Update();
+        update.update(devHashMap.value);
+
+        write.write(devHashMap.value);
+
     }
 }
