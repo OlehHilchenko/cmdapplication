@@ -24,7 +24,7 @@ public class Write implements DataWarehousePath {
             firstName = developer.firstName;
             lastName = developer.lastName;
             skillSet = SkillSetToString(developer.skillSet);
-            accountStat = developer.accountStatusC.accountStatus;
+            accountStat = developer.accountStatusC.accountStatusValue;
             try {
                 FileWriter fwD = new FileWriter(DEVELOPERS, firstWrite);
                 fwD.write(ID);
@@ -65,7 +65,7 @@ public class Write implements DataWarehousePath {
 
     String SkillSetToString(SkillSet skillSet) {
         String skillSetResult = "";
-        String temp[] = skillSet.skills.toArray(String[]::new);
+        String temp[] = skillSet.skillsValues.toArray(String[]::new);
         for (String s : temp)
             skillSetResult = skillSetResult + s + " ";
         return skillSetResult;

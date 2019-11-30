@@ -71,7 +71,7 @@ public class Read implements DataWarehousePath {
                 }
             }
             IDAccount[count] = temp;
-            developersFromFiles.get(Long.parseLong(IDAccount[0])).accountStatusC.accountStatus = IDAccount[1];
+            developersFromFiles.get(Long.parseLong(IDAccount[0])).accountStatusC.accountStatusValue = IDAccount[1];
             Long tempId = (long) 0;
             temp = "";
             count = 0;
@@ -91,8 +91,8 @@ public class Read implements DataWarehousePath {
             skills.add(temp);
             skills.remove("");
             //System.out.println("+++");
-            //System.out.println(skills);
-            developersFromFiles.get(tempId).skillSet.skills = skills;
+            //System.out.println(skillsValues);
+            developersFromFiles.get(tempId).skillSet.skillsValues = skills;
         }
 
         return developersFromFiles;

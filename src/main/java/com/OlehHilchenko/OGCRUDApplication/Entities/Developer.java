@@ -14,8 +14,8 @@ public class Developer {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.skillSet.skills = skillSet;
-        this.accountStatusC.accountStatus = accountStat;
+        this.skillSet.skillsValues = skillSet;
+        this.accountStatusC.accountStatusValue = accountStat;
     }
 
     public Developer(long ID, String firstName, String lastName) {

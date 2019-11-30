@@ -19,9 +19,9 @@ public class Update implements AccountStatus {
         String temp;
 
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scannerU = new Scanner(System.in);
         System.out.println("Past ID");
-        id = scanner.next();
+        id = scannerU.next();
         ID = Long.parseLong(id);
 
         Developer developer = val.get(ID);
@@ -30,14 +30,14 @@ public class Update implements AccountStatus {
 
         System.out.println("To update First Name entry it: ");
         System.out.println("leave unchanged, entry -1 ");
-        temp = scanner.next();
+        temp = scannerU.next();
         if (!temp.equals("-1"))
             firstName = temp;
         else
             firstName = developer.firstName;
         System.out.println("To update Last Name entry it: ");
         System.out.println("leave unchanged, entry -1 ");
-        temp = scanner.next();
+        temp = scannerU.next();
         if (!temp.equals("-1"))
             lastName = temp;
         else
@@ -46,39 +46,40 @@ public class Update implements AccountStatus {
         System.out.println("1 to ACTIVE");
         System.out.println("2 to BANNED");
         System.out.println("3 to DELETED");
-        accountStatusC.accountStatus = scanner.next();
-        switch (accountStatusC.accountStatus) {
+        accountStatusC.accountStatusValue = scannerU.next();
+        switch (accountStatusC.accountStatusValue) {
             case "1":
-                accountStatusC.accountStatus = ACTIVE;
+                accountStatusC.accountStatusValue = ACTIVE;
                 break;
             case "2":
-                accountStatusC.accountStatus = BANNED;
+                accountStatusC.accountStatusValue = BANNED;
                 break;
             case "3":
-                accountStatusC.accountStatus = DELETED;
+                accountStatusC.accountStatusValue = DELETED;
                 break;
             default:
                 break;
         }
-        System.out.println("Update skills set? y/n");
+        System.out.println("Update skillsValues set? y/n");
         temp = "";
-        temp = scanner.next();
+        temp = scannerU.next();
         if (temp.equals("y")) {
             boolean exitEntry = true;
             String skill;
+            System.out.println("Entry skillsValues: ");
             while (exitEntry) {
-                skill = scanner.next();
+                skill = scannerU.next();
                 if (skill.equals("-1")) {
                     exitEntry = false;
                 } else {
                     skills.add(skill);
                 }
-                System.out.println("Entry -1 to stop entry skills");
+                System.out.println("Entry -1 to stop entry skillsValues");
             }
-            scanner.close();
+            //scannerU.close();
         } else
-            skills = developer.skillSet.skills;
+            skills = developer.skillSet.skillsValues;
 
-        return new Developer(ID, firstName, lastName, skills, accountStatusC.accountStatus);
+        return new Developer(ID, firstName, lastName, skills, accountStatusC.accountStatusValue);
     }
 }

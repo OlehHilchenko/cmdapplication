@@ -11,11 +11,12 @@ public class ViewAll {
             Developer dev = val.get(l);
             System.out.print("Developer: (" + l + ") " + dev.firstName + " " + dev.lastName + " ;" );
             System.out.print("Skills: ");
-            for (String s : dev.skillSet.skills)
+            for (String s : dev.skillSet.skillsValues)
                 System.out.print(s + " ,");
             System.out.print(";");
-            System.out.print("AccountStatus: " + dev.accountStatusC.accountStatus);
+            System.out.print("AccountStatus: " + dev.accountStatusC.accountStatusValue);
             System.out.println();
         }
+        System.out.println();
     }
 }

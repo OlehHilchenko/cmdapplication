@@ -15,43 +15,43 @@ public class Create implements AccountStatus {
         AccountStatusC accountStatus = new AccountStatusC();
         LinkedHashSet<String> skills = new LinkedHashSet<>();
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scannerC = new Scanner(System.in);
         System.out.println("Enter first name.");
-        firstName = scanner.next();
+        firstName = scannerC.next();
         System.out.println("Enter last name.");
-        lastName = scanner.next();
+        lastName = scannerC.next();
 
         System.out.println("Enter account status:");
         System.out.println("1 to ACTIVE");
         System.out.println("2 to BANNED");
         System.out.println("3 to DELETED");
-        accountStatus.accountStatus = scanner.next();
-        switch (accountStatus.accountStatus) {
+        accountStatus.accountStatusValue = scannerC.next();
+        switch (accountStatus.accountStatusValue) {
             case "1":
-                accountStatus.accountStatus = ACTIVE;
+                accountStatus.accountStatusValue = ACTIVE;
                 break;
             case "2":
-                accountStatus.accountStatus = BANNED;
+                accountStatus.accountStatusValue = BANNED;
                 break;
             case "3":
-                accountStatus.accountStatus = DELETED;
+                accountStatus.accountStatusValue = DELETED;
                 break;
             default:
                 break;
         }
 
-        System.out.println("Entry skills set: ");
+        System.out.println("Entry skillsValues set: ");
         boolean exitEntry = true;
         String skill;
         while (exitEntry) {
-            skill = scanner.next();
+            skill = scannerC.next();
             if (skill.equals("-1"))
                 exitEntry = false;
             else
                 skills.add(skill);
-            System.out.println("Entry -1 to stop entry skills");
+            System.out.println("Entry -1 to stop entry skillsValues");
         }
-        scanner.close();
-        return new Developer((long) ID, firstName, lastName, skills, accountStatus.accountStatus);
+        //scannerC.close();
+        return new Developer((long) ID, firstName, lastName, skills, accountStatus.accountStatusValue);
     }
 }
