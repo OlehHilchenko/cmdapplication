@@ -8,7 +8,7 @@ import main.java.com.OlehHilchenko.OGCRUDApplication.Entities.*;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Main implements AccountStatus {
+public class CrudMain implements AccountStatus {
 
     public static void main(String[] args) {
 
