@@ -1,22 +1,30 @@
 package main.resources.view;
 
 import main.resources.model.Skill;
-import main.resources.repository.DeleteSkills;
-import main.resources.repository.NewSkills;
-import main.resources.repository.UpdateSkills;
-import main.resources.repository.ViewSkills;
+import main.resources.repository.*;
 
 public class Main {
 
 
     public static void main(String[] args) {
         Skill skill = new Skill();
-        ViewSkills viewSkills = new ViewSkills();
-        String str [] = viewSkills.viewSkill(222333444666l);
-        skill.setID(Long.parseLong(str[0]));
-        skill.setName(str[1]);
+        SkillRepository skillRepository = new SkillRepositoryImpl();
 
-        System.out.println("ID " + skill.getID() + " " + "Name "+ skill.getName());
+        //skillRepository.addSkill(new Skill(727483327371672773l, "Evgen"));
 
+        //System.out.println(skillRepository.getSkillById(222333444555l).toString());
+
+        /*
+        System.out.println(skillRepository.getSkillById(-8972800732400858902l).toString());
+        skillRepository.updateSkill(new Skill(-8972800732400858902l, "Petro"));
+        System.out.println();
+        System.out.println(skillRepository.getSkillById(-8972800732400858902l).toString());
+        */
+
+        /*
+        System.out.println(skillRepository.getSkillById(222333444666l).toString());
+        skillRepository.removeSkill(222333444666l);
+        System.out.println(skillRepository.getSkillById(222333444666l).toString());
+        */
     }
 }

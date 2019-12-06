@@ -14,6 +14,14 @@ public class Skill {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "ID=" + ID +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public void setID(Long ID) {
         this.ID = ID;
     }
