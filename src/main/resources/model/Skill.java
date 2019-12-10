@@ -7,22 +7,22 @@ public class Skill implements Serializable {
 
 
     private Long ID;
-    private String name;
+    private String skillName;
 
     private static final long serialVersionUID = 1l;
     public Skill() {
     }
 
-    public Skill(Long ID, String name) {
+    public Skill(Long ID, String skillName) {
         this.ID = ID;
-        this.name = name;
+        this.skillName = skillName;
     }
 
     @Override
     public String toString() {
         return "Skill{" +
                 "ID=" + ID +
-                ", name='" + name + '\'' +
+                ", skillName='" + skillName + '\'' +
                 '}';
     }
 
@@ -30,16 +30,16 @@ public class Skill implements Serializable {
         this.ID = ID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
     }
 
     public Long getID() {
         return ID;
     }
 
-    public String getName() {
-        return name;
+    public String getSkillName() {
+        return skillName;
     }
 
     @Override
@@ -48,12 +48,12 @@ public class Skill implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Skill skill = (Skill) o;
         return Objects.equals(ID, skill.ID) &&
-                Objects.equals(name, skill.name);
+                Objects.equals(skillName, skill.skillName);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(ID, name);
+        return Objects.hash(ID, skillName);
     }
 }

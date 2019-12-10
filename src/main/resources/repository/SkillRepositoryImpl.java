@@ -14,7 +14,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class SkillRepositoryImpl implements SkillRepository, StoragePath {
-
+    /*
     ArrayList<String> readSkillTxt(String file) {
         ArrayList<String> skillTxtList = new ArrayList<>();
         // id:name ...
@@ -29,20 +29,17 @@ public class SkillRepositoryImpl implements SkillRepository, StoragePath {
         }
         return skillTxtList;
     }
-
-    //read object method
-    public Object ReadObjectFromFile(String filepath) {
+*/
+    //read object ...
+    public List<Skill> ReadObjectFromFile(String filepath) {
 
         try {
-
-            FileInputStream fileIn = new FileInputStream(filepath);
-            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-
-            Object obj = objectIn.readObject();
-
+            List<Skill> skills = new ArrayList<>();
+            ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(filepath));
+            skills = (List<Skill>) objectIn.readObject();
             System.out.println("The Object has been read from the file");
             objectIn.close();
-            return obj;
+            return skills;
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -50,17 +47,71 @@ public class SkillRepositoryImpl implements SkillRepository, StoragePath {
         }
     }
 
-    public long randomId (){
-        ArrayList<String> content = readSkillTxt(SKILLS);
-        Random rnd = new Random();
-            long id = (long) rnd.nextLong();
-        while (checkId(id, content))
-            id = (long) rnd.nextLong();
+    @Override
+    public void add(Skill skill) {
+        List<Skill> content = ReadObjectFromFile(SKILLS);
+        for (Skill s : content)
+            if (s.getID().equals(skill.getID())) {
+                System.out.println("this skill is exist");
+                return;
+            }
+        content.add(skill);
+        System.out.println("this skill is add");
+        WriteObjectToFile(SKILLS, content);
+    }
 
+    @Override
+    public void update(Skill skill) {
+        List<Skill> content = ReadObjectFromFile(SKILLS);
+        for (int i = 0; i < content.size(); i++) {
+            if (content.get(i).getID().equals(skill.getID())) {
+                content.remove(i);
+                content.add(skill);
+                System.out.println("this skill is update");
+                break;
+            }
+        }
+        WriteObjectToFile(SKILLS, content);
+    }
+
+    @Override
+    public void remove(Long ID) {
+        List<Skill> content = ReadObjectFromFile(SKILLS);
+        for (int i = 0; i < content.size(); i++) {
+            if (content.get(i).getID().equals(ID)) {
+                content.remove(i);
+                System.out.println("this skill is deleted");
+                WriteObjectToFile(SKILLS, content);
+                return;
+            }
+        }
+        System.out.println("this skill is no exist");
+    }
+
+    @Override
+    public Skill getById(Long ID) {
+        List<Skill> content = ReadObjectFromFile(SKILLS);
+        for (int i = 0; i < content.size(); i++) {
+            if (content.get(i).getID().equals(ID)) {
+                return content.get(i);
+            }
+        }
+        System.out.println("this skill is no exist");
+        return null;
+    }
+
+    @Override
+    public List<Skill> list() {
+        return ReadObjectFromFile(SKILLS);
+    }
+
+    public long randomId() {
+        Random rnd = new Random();
+        long id = (long) rnd.nextLong();
 
         return id;
     }
-
+/*
     boolean checkId(long id, ArrayList<String> content) {
         String sid = "" + id;
         for (String s : content) {
@@ -78,29 +129,30 @@ public class SkillRepositoryImpl implements SkillRepository, StoragePath {
         }
         return false;
     }
-
-    @Override
+*/
+    /*
     public void addSkill(Skill skill) {
         ArrayList<String> content = readSkillTxt(SKILLS);
         if (!checkId(skill.getID(), content)) {
-            content.add("" + skill.getID() + ":" + skill.getName());
+            content.add("" + skill.getID() + ":" + skill.getSkillName());
             writeSkills(content, SKILLS);
         } else
             System.out.println("this skill is exist");
 
     }
-
-    @Override
+*/
+    /*
     public void updateSkill(Skill skill) {
         ArrayList<String> content = readSkillTxt(SKILLS);
         if (checkId(skill.getID(), content)) {
             content = deleteSkill(skill.getID(), content);
-            content.add("" + skill.getID() + ":" + skill.getName());
+            content.add("" + skill.getID() + ":" + skill.getSkillName());
             writeSkills(content, SKILLS);
         } else
             System.out.println("id this skill is no exist");
     }
-
+*/
+    /*
     ArrayList<String> deleteSkill(long id, ArrayList<String> content) {
         for (int i = 0; i < content.size(); i++) {
             String checkedID = "";
@@ -117,8 +169,8 @@ public class SkillRepositoryImpl implements SkillRepository, StoragePath {
         }
         return content;
     }
-
-    @Override
+*/
+    /*
     public void removeSkill(long id) {
         ArrayList<String> content = readSkillTxt(SKILLS);
         if (checkId(id, content)) {
@@ -128,8 +180,8 @@ public class SkillRepositoryImpl implements SkillRepository, StoragePath {
             System.out.println("tis id is no exist");
 
     }
-
-
+*/
+/*
     String returnStringById(long id, ArrayList<String> content) {
         String sid = "" + id;
         for (String s : content) {
@@ -147,7 +199,8 @@ public class SkillRepositoryImpl implements SkillRepository, StoragePath {
         }
         return "this string no exist";
     }
-
+*/
+/*
     String[] split(String con) {
         String result[] = new String[2];
         result[0] = result[1] = "";
@@ -163,8 +216,8 @@ public class SkillRepositoryImpl implements SkillRepository, StoragePath {
         }
         return result;
     }
-
-    @Override
+*/
+/*
     public Skill getSkillById(long id) {
         ArrayList<String> content = readSkillTxt(SKILLS);
         if (checkId(id, content)) {
@@ -174,12 +227,11 @@ public class SkillRepositoryImpl implements SkillRepository, StoragePath {
 
         return new Skill(-1l, "skill with this id is no exist");
     }
-
-    @Override
+*//*
     public List<Skill> listSkill() {
         return null;
     }
-
+*//*
     void writeSkills(ArrayList<String> content, String file) {
         try {
             FileWriter fileWriter = new FileWriter(file);
@@ -193,15 +245,13 @@ public class SkillRepositoryImpl implements SkillRepository, StoragePath {
             System.out.println(e);
         }
     }
-
+*/
     //write object ...
-    public void WriteObjectToFile(String filepath,Object serObj) {
+    public void WriteObjectToFile(String filepath, List<Skill> skills) {
 
         try {
-
-            FileOutputStream fileOut = new FileOutputStream(filepath);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(serObj);
+            ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(filepath));
+            objectOut.writeObject(skills);
             objectOut.close();
             System.out.println("The Object  was succesfully written to a file");
 
