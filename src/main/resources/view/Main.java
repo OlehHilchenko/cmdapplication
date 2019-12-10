@@ -7,7 +7,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Skill skill = new Skill();
+        Skill skill = new Skill(2233l, "Jora");
         SkillRepository skillRepository = new SkillRepositoryImpl();
 
         //skillRepository.addSkill(new Skill(727483327371672773l, "Evgen"));
@@ -26,5 +26,9 @@ public class Main {
         skillRepository.removeSkill(222333444666l);
         System.out.println(skillRepository.getSkillById(222333444666l).toString());
         */
+        //((SkillRepositoryImpl) skillRepository).WriteObjectToFile("D:\\OG_CRUD\\src\\main\\resources\\files\\developer.txt", skill);
+
+        Object obg = ((SkillRepositoryImpl) skillRepository).ReadObjectFromFile("D:\\OG_CRUD\\src\\main\\resources\\files\\developer.txt");
+        System.out.println(obg.toString());
     }
 }

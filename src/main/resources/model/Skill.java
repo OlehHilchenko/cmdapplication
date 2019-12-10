@@ -1,11 +1,15 @@
 package main.resources.model;
 
-public class Skill {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Skill implements Serializable {
 
 
     private Long ID;
     private String name;
 
+    private static final long serialVersionUID = 1l;
     public Skill() {
     }
 
@@ -36,5 +40,20 @@ public class Skill {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Skill skill = (Skill) o;
+        return Objects.equals(ID, skill.ID) &&
+                Objects.equals(name, skill.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(ID, name);
     }
 }
