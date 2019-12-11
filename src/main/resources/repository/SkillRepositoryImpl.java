@@ -80,13 +80,6 @@ public class SkillRepositoryImpl implements SkillRepository {
         return readObjectFromFile(SKILLS);
     }
 
-    public long randomId() {
-        Random rnd = new Random();
-        long id = (long) rnd.nextLong();
-
-        return id;
-    }
-
     //write object ...
     public void writeObjectToFile(String filepath, List<Skill> skills) {
         try {

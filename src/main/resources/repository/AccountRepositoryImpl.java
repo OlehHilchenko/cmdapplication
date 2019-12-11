@@ -1,7 +1,6 @@
 package main.resources.repository;
 
 import main.resources.model.Account;
-import main.resources.model.AccountStatus;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

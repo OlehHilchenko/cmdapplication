@@ -1,16 +1,20 @@
 package main.resources.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
-public class Developer {
+public class Developer implements Serializable {
 
-    long ID;
+    Long ID;
     String developerName;
     Account account;
     Set<Skill> skill;
 
-    Developer(){};
+
+    private static final long serialVersionUID = 1l;
+
+    public Developer(){};
 
     public Developer(long ID, String developerName, Account account, Set<Skill> skill) {
         this.ID = ID;
@@ -19,7 +23,7 @@ public class Developer {
         this.skill = skill;
     }
 
-    public long getID() {
+    public Long getID() {
         return ID;
     }
 
