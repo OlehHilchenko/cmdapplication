@@ -1,4 +1,4 @@
-package main.resources.model;
+package main.java.model;
 
 public enum AccountStatus {
     ACTIVE,

@@ -1,38 +1,61 @@
-package main.resources.repository;
+package main.java.repository;
 
-import main.resources.model.Account;
+import main.java.model.Account;
+import main.java.model.AccountStatus;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AccountRepositoryImpl implements AccountRepository {
 
-    public static final String ACCOUNT = "main\\resources\\files\\account.txt";
+    public static final String ACCOUNT = "main\\java\\files\\account.txt";
 
     public List<Account> readObjectFromFile(String filepath) {
+        ArrayList<String> temp = new ArrayList<>();
         try {
-            List<Account> accounts = new ArrayList<>();
-            ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(filepath));
-            accounts = (List<Account>) objectIn.readObject();
-            objectIn.close();
-            return accounts;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
+            Scanner scan = new Scanner(new FileInputStream(filepath));
+            while (scan.hasNextLine())
+                temp.add(scan.nextLine());
+            scan.close();
+        } catch (IOException e) {
+            System.out.println(e);
         }
+        return splitString(temp);
+    }
+
+    List<Account> splitString(ArrayList<String> s) {
+        List<Account> content = new ArrayList<>();
+        for (String str : s) {
+            Account account  = new Account();
+            String strIdAndScillName = "";
+            for (int i = 0; i < str.length(); i++) {
+                if (str.charAt(i) != ':')
+                    strIdAndScillName += str.charAt(i);
+                else if (str.charAt(i) == ':') {
+                    account.setID(Long.parseLong(strIdAndScillName));
+                    strIdAndScillName = "";
+                }
+            }
+            account.setAccountStatus(AccountStatus.valueOf(strIdAndScillName));
+            content.add(account);
+        }
+        return content;
     }
 
     public void writeObjectToFile(String filepath, List<Account> accounts) {
         try {
-            ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(filepath));
-            objectOut.writeObject(accounts);
-            objectOut.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            boolean firstWrite = false;
+            for (Account account : accounts) {
+                FileWriter fw = new FileWriter(filepath, firstWrite);
+                fw.write("" + account.getID() + ":" + account.getAccountStatus());
+                fw.write(System.getProperty("line.separator"));
+                fw.close();
+                firstWrite = true;
+            }
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 

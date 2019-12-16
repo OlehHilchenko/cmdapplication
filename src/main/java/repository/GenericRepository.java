@@ -1,6 +1,4 @@
-package main.resources.repository;
-
-import main.resources.model.Skill;
+package main.java.repository;
 
 import java.util.List;
 

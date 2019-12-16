@@ -1,6 +1,6 @@
-package main.resources.repository;
+package main.java.repository;
 
-import main.resources.model.Skill;
+import main.java.model.Skill;
 
 
 public interface SkillRepository extends GenericRepository<Skill, Long> {

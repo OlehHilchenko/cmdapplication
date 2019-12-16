@@ -1,6 +1,6 @@
-package main.resources.repository;
+package main.java.repository;
 
-import main.resources.model.Developer;
+import main.java.model.Developer;
 
 public interface DeveloperRepository extends GenericRepository<Developer, Long> {
 }

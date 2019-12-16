@@ -1,4 +1,4 @@
-package main.resources.view.uniqueid;
+package main.java.view.uniqueid;
 
 import java.util.Random;
 import java.util.*;
@@ -6,7 +6,7 @@ import java.io.*;
 
 public class RandomLongID {
 
-    public static final String IDTXT = "main\\resources\\view\\uniqueid\\ID.txt";
+    public static final String IDTXT = "main\\java\\view\\uniqueid\\ID.txt";
 
     long randomId() {
         Random rnd = new Random();

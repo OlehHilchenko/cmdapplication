@@ -1,31 +1,47 @@
-package main.resources.repository;
+package main.java.repository;
 
-import main.resources.model.Skill;
+import main.java.model.Skill;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Scanner;
+import java.io.*;
 
 public class SkillRepositoryImpl implements SkillRepository {
 
-    public static final String SKILLS = "main\\resources\\files\\skills.txt";
+    public static final String SKILLS = "main\\java\\files\\skills.txt";
 
-    //read object ...
     public List<Skill> readObjectFromFile(String filepath) {
+        ArrayList<String> temp = new ArrayList<>();
         try {
-            List<Skill> skills = new ArrayList<>();
-            ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(filepath));
-            skills = (List<Skill>) objectIn.readObject();
-            objectIn.close();
-            return skills;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
+            Scanner scan = new Scanner(new FileInputStream(filepath));
+            while (scan.hasNextLine())
+                temp.add(scan.nextLine());
+            scan.close();
+        } catch (IOException e) {
+            System.out.println(e);
         }
+        return splitString(temp);
+    }
+
+    List<Skill> splitString(ArrayList<String> s) {
+        List<Skill> content = new ArrayList<>();
+        for (String str : s) {
+            Skill skill = new Skill();
+            String strIdAndScillName = "";
+            for (int i = 0; i < str.length(); i++) {
+                if (str.charAt(i) != ':')
+                    strIdAndScillName += str.charAt(i);
+                else if (str.charAt(i) == ':') {
+                    skill.setID(Long.parseLong(strIdAndScillName));
+                    strIdAndScillName = "";
+                }
+            }
+            skill.setSkillName(strIdAndScillName);
+            content.add(skill);
+        }
+        return content;
     }
 
     @Override
@@ -80,14 +96,18 @@ public class SkillRepositoryImpl implements SkillRepository {
         return readObjectFromFile(SKILLS);
     }
 
-    //write object ...
     public void writeObjectToFile(String filepath, List<Skill> skills) {
         try {
-            ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(filepath));
-            objectOut.writeObject(skills);
-            objectOut.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            boolean firstWrite = false;
+            for (Skill skill : skills) {
+                FileWriter fw = new FileWriter(filepath, firstWrite);
+                fw.write("" + skill.getID() + ":" + skill.getSkillName());
+                fw.write(System.getProperty("line.separator"));
+                fw.close();
+                firstWrite = true;
+            }
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 }

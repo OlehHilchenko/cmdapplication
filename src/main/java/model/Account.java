@@ -1,4 +1,4 @@
-package main.resources.model;
+package main.java.model;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,7 +20,7 @@ public class Account implements Serializable {
         return ID;
     }
 
-    public void setID(long ID) {
+    public void setID(Long ID) {
         this.ID = ID;
     }
 
