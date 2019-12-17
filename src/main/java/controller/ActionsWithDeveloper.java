@@ -22,14 +22,13 @@ public class ActionsWithDeveloper {
     }
 
     private void actionAddNewDeveloper(){
-        ViewAllActions viewAllActions = new ViewAllActions();
         Developer developer = new Developer();
         RandomLongID randomLongID = new RandomLongID();
         developer.setID(randomLongID.checkedID());
-        System.out.println(viewAllActions.ENTRY_DEVELOPER_NAME);
+        System.out.println(ViewAllActions.ENTRY_DEVELOPER_NAME);
         developer.setDeveloperName((String) scan());
 
-        viewAllActions.choiceAccountStatus();
+        ViewAllActions.choiceAccountStatus();
         switch ((String) scan()) {
             case "A":
                 developer.setAccount(new Account(randomLongID.checkedID(), AccountStatus.ACTIVE));
@@ -47,7 +46,7 @@ public class ActionsWithDeveloper {
         Set<Skill> skillSet = new HashSet<>();
         boolean exit = true;
         while (exit){
-            System.out.println(viewAllActions.ENTRY_SKILL_NAME);
+            System.out.println(ViewAllActions.ENTRY_SKILL_NAME);
             String s = scan();
             if (s.equals("-1")){
                 exit = false;
@@ -60,10 +59,9 @@ public class ActionsWithDeveloper {
     }
 
     public void mainMenu() {
-        ViewAllActions viewAllActions = new ViewAllActions();
 
         while (true) {
-            viewAllActions.viewMainMenu();
+            ViewAllActions.viewMainMenu();
             String scan = scan();
             switch (scan) {
                 case "1":
@@ -95,18 +93,17 @@ public class ActionsWithDeveloper {
     }
 
     private void updateDeveloper(){
-        ViewAllActions viewAllActions = new ViewAllActions();
-        System.out.println(viewAllActions.ENTRY_ID_DEVELOPER_WHICH_YOU_WANT_TO_CHANGE);
+        System.out.println(ViewAllActions.ENTRY_ID_DEVELOPER_WHICH_YOU_WANT_TO_CHANGE);
         Long id = Long.parseLong(scan());
 
         DeveloperRepository developerRepository = new DeveloperRepositoryImpl();
         Developer developer = ((DeveloperRepositoryImpl) developerRepository).getById(id);
         developerRepository.remove(id);
 
-        System.out.println(viewAllActions.ENTRY_DEVELOPER_NAME);
+        System.out.println(ViewAllActions.ENTRY_DEVELOPER_NAME);
         developer.setDeveloperName((String) scan());
 
-        viewAllActions.choiceAccountStatus();
+        ViewAllActions.choiceAccountStatus();
         switch ((String) scan()) {
             case "A":
                 developer.setAccount(new Account((developer.getAccount().getID()),(AccountStatus.ACTIVE)));
@@ -125,7 +122,7 @@ public class ActionsWithDeveloper {
         Set<Skill> skillSet = new HashSet<>();
         boolean exit = true;
         while (exit){
-            System.out.println(viewAllActions.ENTRY_SKILL_NAME);
+            System.out.println(ViewAllActions.ENTRY_SKILL_NAME);
             String s = scan();
             if (s.equals("-1")){
                 exit = false;
@@ -136,8 +133,7 @@ public class ActionsWithDeveloper {
     }
 
     private void viewByID(){
-        ViewAllActions viewAllActions = new ViewAllActions();
-        System.out.println(viewAllActions.ENTRY_ID_DEVELOPER_WHICH_YOU_WANT_TO_SEE);
+        System.out.println(ViewAllActions.ENTRY_ID_DEVELOPER_WHICH_YOU_WANT_TO_SEE);
         Long id = Long.parseLong(scan());
         DeveloperRepository developerRepository = new DeveloperRepositoryImpl();
         Developer developer = developerRepository.getById(id);
@@ -145,8 +141,7 @@ public class ActionsWithDeveloper {
     }
 
     private void deleteByID (){
-        ViewAllActions viewAllActions = new ViewAllActions();
-        System.out.println(viewAllActions.ENTRY_ID_REMOVABLE_DEVELOPER);
+        System.out.println(ViewAllActions.ENTRY_ID_REMOVABLE_DEVELOPER);
         Long id = Long.parseLong(scan());
         DeveloperRepository developerRepository = new DeveloperRepositoryImpl();
         developerRepository.remove(id);

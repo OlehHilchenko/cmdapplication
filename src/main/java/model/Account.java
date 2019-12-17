@@ -5,8 +5,8 @@ import java.util.Objects;
 
 public class Account implements Serializable {
 
-    Long ID;
-    public AccountStatus accountStatus;
+    private Long ID;
+    private AccountStatus accountStatus;
 
     private static final long serialVersionUID = 1l;
     public Account(){};

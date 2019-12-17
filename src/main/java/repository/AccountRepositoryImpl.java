@@ -10,9 +10,9 @@ import java.util.Scanner;
 
 public class AccountRepositoryImpl implements AccountRepository {
 
-    public static final String ACCOUNT = "main\\java\\files\\account.txt";
+    private static final String ACCOUNT = "main\\java\\files\\account.txt";
 
-    public List<Account> readObjectFromFile(String filepath) {
+    private List<Account> readObjectFromFile(String filepath) {
         ArrayList<String> temp = new ArrayList<>();
         try {
             Scanner scan = new Scanner(new FileInputStream(filepath));
@@ -25,7 +25,7 @@ public class AccountRepositoryImpl implements AccountRepository {
         return splitString(temp);
     }
 
-    List<Account> splitString(ArrayList<String> s) {
+    private List<Account> splitString(ArrayList<String> s) {
         List<Account> content = new ArrayList<>();
         for (String str : s) {
             Account account  = new Account();
@@ -44,7 +44,7 @@ public class AccountRepositoryImpl implements AccountRepository {
         return content;
     }
 
-    public void writeObjectToFile(String filepath, List<Account> accounts) {
+    private void writeObjectToFile(String filepath, List<Account> accounts) {
         try {
             boolean firstWrite = false;
             for (Account account : accounts) {

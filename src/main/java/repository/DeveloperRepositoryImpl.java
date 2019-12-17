@@ -8,9 +8,9 @@ import java.util.*;
 
 public class DeveloperRepositoryImpl implements DeveloperRepository {
 
-    public static final String DEVELOPER = "main\\java\\files\\developer.txt";
+    private static final String DEVELOPER = "main\\java\\files\\developer.txt";
 
-    public List<Developer> readObjectFromFile(String filepath) {
+    private List<Developer> readObjectFromFile(String filepath) {
         ArrayList<String> temp = new ArrayList<>();
         try {
             Scanner scan = new Scanner(new FileInputStream(filepath));
@@ -23,7 +23,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
         return splitString(temp);
     }
 
-    List<Developer> splitString(ArrayList<String> s) {
+    private List<Developer> splitString(ArrayList<String> s) {
         AccountRepository accountRepository = new AccountRepositoryImpl();
         SkillRepository skillRepository = new SkillRepositoryImpl();
         List<Developer> content = new ArrayList<>();
@@ -63,7 +63,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
         return content;
     }
 
-    public void writeObjectToFile(String filepath, List<Developer> developers) {
+    private void writeObjectToFile(String filepath, List<Developer> developers) {
         try {
             boolean firstWrite = false;
             SkillRepository skillRepository = new SkillRepositoryImpl();
@@ -129,7 +129,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
                 AccountRepository accountRepository = new AccountRepositoryImpl();
                 SkillRepository skillRepository = new SkillRepositoryImpl();
                 accountRepository.remove(content.get(i).getAccount().getID());
-                for (Skill skill: content.get(i).getSkill())
+                for (Skill skill : content.get(i).getSkill())
                     skillRepository.remove(skill.getID());
                 content.remove(i);
                 writeObjectToFile(DEVELOPER, content);

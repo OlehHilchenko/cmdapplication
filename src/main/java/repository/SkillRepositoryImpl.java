@@ -10,9 +10,9 @@ import java.io.*;
 
 public class SkillRepositoryImpl implements SkillRepository {
 
-    public static final String SKILLS = "main\\java\\files\\skills.txt";
+    private static final String SKILLS = "main\\java\\files\\skills.txt";
 
-    public List<Skill> readObjectFromFile(String filepath) {
+    private List<Skill> readObjectFromFile(String filepath) {
         ArrayList<String> temp = new ArrayList<>();
         try {
             Scanner scan = new Scanner(new FileInputStream(filepath));
@@ -25,7 +25,7 @@ public class SkillRepositoryImpl implements SkillRepository {
         return splitString(temp);
     }
 
-    List<Skill> splitString(ArrayList<String> s) {
+    private List<Skill> splitString(ArrayList<String> s) {
         List<Skill> content = new ArrayList<>();
         for (String str : s) {
             Skill skill = new Skill();
@@ -96,7 +96,7 @@ public class SkillRepositoryImpl implements SkillRepository {
         return readObjectFromFile(SKILLS);
     }
 
-    public void writeObjectToFile(String filepath, List<Skill> skills) {
+    private void writeObjectToFile(String filepath, List<Skill> skills) {
         try {
             boolean firstWrite = false;
             for (Skill skill : skills) {

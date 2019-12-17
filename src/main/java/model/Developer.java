@@ -6,10 +6,10 @@ import java.util.Set;
 
 public class Developer implements Serializable {
 
-    Long ID;
-    String developerName;
-    Account account;
-    Set<Skill> skill;
+    private Long ID;
+    private String developerName;
+    private Account account;
+    private Set<Skill> skill;
 
 
     private static final long serialVersionUID = 1l;

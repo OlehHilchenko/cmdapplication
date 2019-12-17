@@ -6,15 +6,14 @@ import java.io.*;
 
 public class RandomLongID {
 
-    public static final String IDTXT = "main\\java\\view\\uniqueid\\ID.txt";
+    private static final String IDTXT = "main\\java\\view\\uniqueid\\ID.txt";
 
-    long randomId() {
+    private long randomId() {
         Random rnd = new Random();
-        long id = (long) rnd.nextLong();
-        return id;
+        return (long) rnd.nextLong();
     }
 
-    ArrayList<String> readId(String file) {
+    private ArrayList<String> readId(String file) {
         ArrayList<String> temp = new ArrayList<>();
         try {
             Scanner scan = new Scanner(new FileInputStream(file));
@@ -27,7 +26,7 @@ public class RandomLongID {
         return temp;
     }
 
-    void writeId(ArrayList<String> id, String file) {
+    private void writeId(ArrayList<String> id, String file) {
         try {
             boolean firstWrite = false;
             for (String s : id) {
