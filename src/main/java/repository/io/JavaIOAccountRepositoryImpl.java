@@ -9,7 +9,7 @@ import java.util.List;
 
 public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
-    private static final String ACCOUNT = "main\\java\\files\\accounts.txt";
+    private static final String ACCOUNT = "main\\java\\resources\\files\\accounts.txt";
 
     private List<Account> splitString(List<String> s) {
         List<Account> content = new ArrayList<>();

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class JavaIOSkillRepositoryImpl implements SkillRepository {
 
-    private static final String SKILLS = "main\\java\\files\\skills.txt";
+    private static final String SKILLS = "main\\java\\resources\\files\\skills.txt";
 
     private List<Skill> splitString(List<String> s) {
         List<Skill> content = new ArrayList<>();

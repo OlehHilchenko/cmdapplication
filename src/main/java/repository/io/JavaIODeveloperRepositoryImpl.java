@@ -11,7 +11,7 @@ import java.util.*;
 
 public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
 
-    private static final String DEVELOPER = "main\\java\\files\\developers.txt";
+    private static final String DEVELOPER = "main\\java\\resources\\files\\developers.txt";
 
     private List<Developer> splitString(List<String> s) {
         AccountRepository accountRepository = new JavaIOAccountRepositoryImpl();
