@@ -1,5 +1,8 @@
 package main.java.view;
 
+
+import java.util.Scanner;
+
 public class ViewAllActions {
     static public final String ENTRY_DEVELOPER_NAME = "Entry developer name: ";
     static public final String ENTRY_SKILL_NAME = "Entry skill name: (to exit, entry -1)";
@@ -22,5 +25,17 @@ public class ViewAllActions {
         System.out.println("A - ACTIVE");
         System.out.println("B - BANED");
         System.out.println("D - DELETED");
+    }
+
+    static public void updateSkillMenu(){
+        System.out.println("Choice action with skill: ");
+        System.out.println("Delete skill - D");
+        System.out.println("Save skill - S");
+        System.out.println("Just enter the name of the skill to update the current Skill");
+    }
+
+    public static String scan() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.next();
     }
 }

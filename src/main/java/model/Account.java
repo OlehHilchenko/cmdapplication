@@ -5,23 +5,23 @@ import java.util.Objects;
 
 public class Account implements Serializable {
 
-    private Long ID;
+    private Long id;
     private AccountStatus accountStatus;
 
     private static final long serialVersionUID = 1l;
     public Account(){};
 
     public Account(long ID, AccountStatus accountStatus) {
-        this.ID = ID;
+        this.id = ID;
         this.accountStatus = accountStatus;
     }
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public AccountStatus getAccountStatus() {
@@ -37,20 +37,20 @@ public class Account implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return ID == account.ID &&
+        return id == account.id &&
                 accountStatus == account.accountStatus;
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(ID, accountStatus);
+        return Objects.hash(id, accountStatus);
     }
 
     @Override
     public String toString() {
         return "Account{" +
-                "ID=" + ID +
+                "id=" + id +
                 ", accountStatus=" + accountStatus +
                 '}';
     }

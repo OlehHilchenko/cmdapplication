@@ -6,40 +6,40 @@ import java.util.Objects;
 public class Skill implements Serializable {
 
 
-    private Long ID;
-    private String skillName;
+    private Long id;
+    private String name;
 
     private static final long serialVersionUID = 1l;
     public Skill() {
     }
 
     public Skill(Long ID, String skillName) {
-        this.ID = ID;
-        this.skillName = skillName;
+        this.id = ID;
+        this.name = skillName;
     }
 
     @Override
     public String toString() {
         return "Skill{" +
-                "ID=" + ID +
-                ", skillName='" + skillName + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setSkillName(String skillName) {
-        this.skillName = skillName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public String getSkillName() {
-        return skillName;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -47,13 +47,13 @@ public class Skill implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Skill skill = (Skill) o;
-        return Objects.equals(ID, skill.ID) &&
-                Objects.equals(skillName, skill.skillName);
+        return Objects.equals(id, skill.id) &&
+                Objects.equals(name, skill.name);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(ID, skillName);
+        return Objects.hash(id, name);
     }
 }
