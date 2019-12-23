@@ -6,16 +6,16 @@ import main.java.repository.AccountRepository;
 import main.java.repository.DeveloperRepository;
 import main.java.repository.SkillRepository;
 
-import java.io.*;
 import java.util.*;
 
 public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
 
-    private static final String DEVELOPER = "main\\java\\resources\\files\\developers.txt";
+    private static final String DEVELOPER = "main\\resources\\files\\developers.txt";
+
+    private AccountRepository accountRepository = new JavaIOAccountRepositoryImpl();
+    private SkillRepository skillRepository = new JavaIOSkillRepositoryImpl();
 
     private List<Developer> splitString(List<String> s) {
-        AccountRepository accountRepository = new JavaIOAccountRepositoryImpl();
-        SkillRepository skillRepository = new JavaIOSkillRepositoryImpl();
         List<Developer> content = new ArrayList<>();
         for (String str : s) {
             Developer developer = new Developer();
@@ -54,8 +54,6 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
     }
 
     private List<String> developerToString(List<Developer> content) {
-        SkillRepository skillRepository = new JavaIOSkillRepositoryImpl();
-        AccountRepository accountRepository = new JavaIOAccountRepositoryImpl();
         List<String> stringList = new ArrayList<>();
         for (Developer developer : content) {
             accountRepository.add(developer.getAccount());
@@ -80,18 +78,18 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
 
     @Override
     public void add(Developer developer) {
-        List<Developer> content = splitString(ReadStringsFromFile.readObjectFromFile(DEVELOPER));
+        List<Developer> content = splitString(IOUtils.readObjectFromFile(DEVELOPER));
         for (Developer d : content)
             if (d.getId().equals(developer.getId())) {
                 return;
             }
         content.add(developer);
-        WriteStringsInFile.writeStringsToFile(DEVELOPER, developerToString(content));
+        IOUtils.writeStringsToFile(DEVELOPER, developerToString(content));
     }
 
     @Override
     public void update(Developer developer) {
-        List<Developer> content = splitString(ReadStringsFromFile.readObjectFromFile(DEVELOPER));
+        List<Developer> content = splitString(IOUtils.readObjectFromFile(DEVELOPER));
         for (int i = 0; i < content.size(); i++) {
             if (content.get(i).getId().equals(developer.getId())) {
                 remove(content.get(i).getId());
@@ -99,12 +97,12 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
                 break;
             }
         }
-        WriteStringsInFile.writeStringsToFile(DEVELOPER, developerToString(content));
+        IOUtils.writeStringsToFile(DEVELOPER, developerToString(content));
     }
 
     @Override
     public void remove(Long ID) {
-        List<Developer> content = splitString(ReadStringsFromFile.readObjectFromFile(DEVELOPER));
+        List<Developer> content = splitString(IOUtils.readObjectFromFile(DEVELOPER));
         for (int i = 0; i < content.size(); i++) {
             if (content.get(i).getId().equals(ID)) {
                 AccountRepository accountRepository = new JavaIOAccountRepositoryImpl();
@@ -113,7 +111,7 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
                 for (Skill skill : content.get(i).getSkills())
                     skillRepository.remove(skill.getId());
                 content.remove(i);
-                WriteStringsInFile.writeStringsToFile(DEVELOPER, developerToString(content));
+                IOUtils.writeStringsToFile(DEVELOPER, developerToString(content));
                 return;
             }
         }
@@ -121,7 +119,7 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
 
     @Override
     public Developer getById(Long ID) {
-        List<Developer> content = splitString(ReadStringsFromFile.readObjectFromFile(DEVELOPER));
+        List<Developer> content = splitString(IOUtils.readObjectFromFile(DEVELOPER));
         for (int i = 0; i < content.size(); i++) {
             if (content.get(i).getId().equals(ID)) {
                 return content.get(i);
@@ -132,26 +130,7 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
 
     @Override
     public List<Developer> list() {
-        return splitString(ReadStringsFromFile.readObjectFromFile(DEVELOPER));
+        return splitString(IOUtils.readObjectFromFile(DEVELOPER));
     }
 
-    public static Long nextLongId(List<Developer> content) {
-        Long nextID = 0l;
-
-        for (Developer developer : content) {
-            long id = developer.getId();
-            long accountID = developer.getAccount().getId();
-            Set<Skill> skillSet = developer.getSkills();
-
-            if (nextID < id)
-                nextID = id;
-            if (nextID < accountID)
-                nextID = accountID;
-            for (Skill skill : skillSet) {
-                if (nextID < skill.getId())
-                    nextID = skill.getId();
-            }
-        }
-        return nextID++;
-    }
 }

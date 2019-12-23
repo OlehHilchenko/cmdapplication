@@ -2,8 +2,7 @@ package main.java.controller;
 
 import main.java.model.Developer;
 import main.java.model.Skill;
-import main.java.repository.io.JavaIODeveloperRepositoryImpl;
-import main.java.repository.io.NewLongID;
+import main.java.repository.io.IOUtils;
 import main.java.view.ViewAllActions;
 
 import java.util.HashSet;
@@ -13,16 +12,16 @@ public class DeveloperController {
 
     public Developer getNewDeveloper() {
 
-        NewLongID newLongID = new NewLongID();
+        IOUtils ioUtils = new IOUtils();
 
         Developer developer = new Developer();
-        developer.setId(newLongID.newLongID());
+        developer.setId(ioUtils.newLongID());
 
         System.out.println(ViewAllActions.ENTRY_DEVELOPER_NAME);
         developer.setName((String) ViewAllActions.scan());
 
         AccountController accountController = new AccountController();
-        developer.setAccount(accountController.getNewAccount(newLongID.newLongID()));
+        developer.setAccount(accountController.getNewAccount(ioUtils.newLongID()));
 
         Set<Skill> skillSet = new HashSet<>();
         boolean exit = true;
@@ -33,7 +32,7 @@ public class DeveloperController {
             if (s.equals("-1")) {
                 exit = false;
             } else {
-                skillSet.add(skillController.getNewSkill(newLongID.newLongID(), s));
+                skillSet.add(skillController.getNewSkill(ioUtils.newLongID(), s));
             }
         }
         developer.setSkills(skillSet);

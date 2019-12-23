@@ -9,7 +9,7 @@ import java.util.List;
 
 public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
-    private static final String ACCOUNT = "main\\java\\resources\\files\\accounts.txt";
+    private static final String ACCOUNT = "main\\resources\\files\\accounts.txt";
 
     private List<Account> splitString(List<String> s) {
         List<Account> content = new ArrayList<>();
@@ -40,18 +40,18 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
     @Override
     public void add(Account account) {
-        List<Account> content = splitString(ReadStringsFromFile.readObjectFromFile(ACCOUNT));
+        List<Account> content = splitString(IOUtils.readObjectFromFile(ACCOUNT));
         for (Account a : content)
             if (a.getId().equals(account.getId())) {
                 return;
             }
         content.add(account);
-        WriteStringsInFile.writeStringsToFile(ACCOUNT, accountToString(content));
+        IOUtils.writeStringsToFile(ACCOUNT, accountToString(content));
     }
 
     @Override
     public void update(Account account) {
-        List<Account> content = splitString(ReadStringsFromFile.readObjectFromFile(ACCOUNT));
+        List<Account> content = splitString(IOUtils.readObjectFromFile(ACCOUNT));
         for (int i = 0; i < content.size(); i++) {
             if (content.get(i).getId().equals(account.getId())) {
                 content.remove(i);
@@ -59,16 +59,16 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
                 break;
             }
         }
-        WriteStringsInFile.writeStringsToFile(ACCOUNT, accountToString(content));
+        IOUtils.writeStringsToFile(ACCOUNT, accountToString(content));
     }
 
     @Override
     public void remove(Long ID) {
-        List<Account> content = splitString(ReadStringsFromFile.readObjectFromFile(ACCOUNT));
+        List<Account> content = splitString(IOUtils.readObjectFromFile(ACCOUNT));
         for (int i = 0; i < content.size(); i++) {
             if (content.get(i).getId().equals(ID)) {
                 content.remove(i);
-                WriteStringsInFile.writeStringsToFile(ACCOUNT, accountToString(content));
+                IOUtils.writeStringsToFile(ACCOUNT, accountToString(content));
                 return;
             }
         }
@@ -76,7 +76,7 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
     @Override
     public Account getById(Long ID) {
-        List<Account> content = splitString(ReadStringsFromFile.readObjectFromFile(ACCOUNT));
+        List<Account> content = splitString(IOUtils.readObjectFromFile(ACCOUNT));
         for (int i = 0; i < content.size(); i++) {
             if (content.get(i).getId().equals(ID)) {
                 return content.get(i);
@@ -87,6 +87,6 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
     @Override
     public List<Account> list() {
-        return splitString(ReadStringsFromFile.readObjectFromFile(ACCOUNT));
+        return splitString(IOUtils.readObjectFromFile(ACCOUNT));
     }
 }

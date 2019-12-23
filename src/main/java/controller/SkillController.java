@@ -7,7 +7,7 @@ import main.java.view.ViewAllActions;
 public class SkillController {
 
     public Skill getNewSkill(Long id, String name) {
-
+    // Long id, generated in class DeveloperController, and passed to this method.
         Skill skill = new Skill();
 
         skill.setId(id);

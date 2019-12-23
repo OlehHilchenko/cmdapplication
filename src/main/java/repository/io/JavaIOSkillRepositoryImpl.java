@@ -8,7 +8,7 @@ import java.util.List;
 
 public class JavaIOSkillRepositoryImpl implements SkillRepository {
 
-    private static final String SKILLS = "main\\java\\resources\\files\\skills.txt";
+    private static final String SKILLS = "main\\resources\\files\\skills.txt";
 
     private List<Skill> splitString(List<String> s) {
         List<Skill> content = new ArrayList<>();
@@ -39,18 +39,18 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
 
     @Override
     public void add(Skill skill) {
-        List<Skill> content = splitString(ReadStringsFromFile.readObjectFromFile(SKILLS));
+        List<Skill> content = splitString(IOUtils.readObjectFromFile(SKILLS));
         for (Skill s : content)
             if (s.getId().equals(skill.getId())) {
                 return;
             }
         content.add(skill);
-        WriteStringsInFile.writeStringsToFile(SKILLS, skillToString(content));
+        IOUtils.writeStringsToFile(SKILLS, skillToString(content));
     }
 
     @Override
     public void update(Skill skill) {
-        List<Skill> content = splitString(ReadStringsFromFile.readObjectFromFile(SKILLS));
+        List<Skill> content = splitString(IOUtils.readObjectFromFile(SKILLS));
         for (int i = 0; i < content.size(); i++) {
             if (content.get(i).getId().equals(skill.getId())) {
                 content.remove(i);
@@ -58,16 +58,16 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
                 break;
             }
         }
-        WriteStringsInFile.writeStringsToFile(SKILLS, skillToString(content));
+        IOUtils.writeStringsToFile(SKILLS, skillToString(content));
     }
 
     @Override
     public void remove(Long ID) {
-        List<Skill> content = splitString(ReadStringsFromFile.readObjectFromFile(SKILLS));
+        List<Skill> content = splitString(IOUtils.readObjectFromFile(SKILLS));
         for (int i = 0; i < content.size(); i++) {
             if (content.get(i).getId().equals(ID)) {
                 content.remove(i);
-                WriteStringsInFile.writeStringsToFile(SKILLS, skillToString(content));
+                IOUtils.writeStringsToFile(SKILLS, skillToString(content));
                 return;
             }
         }
@@ -75,7 +75,7 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
 
     @Override
     public Skill getById(Long ID) {
-        List<Skill> content = splitString(ReadStringsFromFile.readObjectFromFile(SKILLS));
+        List<Skill> content = splitString(IOUtils.readObjectFromFile(SKILLS));
         for (int i = 0; i < content.size(); i++) {
             if (content.get(i).getId().equals(ID)) {
                 return content.get(i);
@@ -86,7 +86,7 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
 
     @Override
     public List<Skill> list() {
-        return splitString(ReadStringsFromFile.readObjectFromFile(SKILLS));
+        return splitString(IOUtils.readObjectFromFile(SKILLS));
     }
 
 }
